@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static junit.framework.TestCase.*;
@@ -19,25 +20,32 @@ public class AngleFinderTest {
     }
 
     @Test
-    public void testFindAngle_twoTreesToFourNumbers() {
-        List<Tree> trees = Arrays.asList(new Tree(Math.sqrt(3), 1), new Tree(1, Math.sqrt(3)));
+    public void testFindAngle_zeroTrees() {
+        List<Tree> trees = Collections.emptyList();
 
-        assertEquals(Math.PI * 1 / 6, angleFinder.findAngle(trees, Math.PI / 2), epsilon);
+        assertEquals(0, angleFinder.findAngle(trees, Math.PI / 2 + epsilon), epsilon);
     }
 
     @Test
-    public void testFindAngle_fourTreesTosixNumbers() {
+    public void testFindAngle_twoTreesCorrespondFourNumbers() {
+        List<Tree> trees = Arrays.asList(new Tree(Math.sqrt(3), 1), new Tree(1, Math.sqrt(3)));
+
+        assertEquals(Math.PI * 1 / 6, angleFinder.findAngle(trees, Math.PI / 2 + epsilon), epsilon);
+    }
+
+    @Test
+    public void testFindAngle_fourTreesCorrespondsixNumbers() {
         List<Tree> trees = Arrays.asList(
                 new Tree(Math.sqrt(3), 1),
                 new Tree(1, Math.sqrt(3)),
                 new Tree(1, -Math.sqrt(3)),
                 new Tree(Math.sqrt(3), -1));
 
-        assertEquals(Math.PI * 5 / 3, angleFinder.findAngle(trees, Math.PI / 2), epsilon);
+        assertEquals(Math.PI * 5 / 3, angleFinder.findAngle(trees, Math.PI / 2 + epsilon), epsilon);
     }
 
     @Test
-    public void testFindAngle_nineTreesToElevenNumbers() {
+    public void testFindAngle_nineTreesCorrespondElevenNumbers() {
         List<Tree> trees = Arrays.asList(
 // points from the right
                 new Tree(Math.sqrt(3), 1),
@@ -52,7 +60,7 @@ public class AngleFinderTest {
                 new Tree(-1, 0)
         );
 
-        assertEquals(Math.PI * 5 / 3, angleFinder.findAngle(trees, Math.PI / 2), epsilon);
+        assertEquals(Math.PI * 5 / 3, angleFinder.findAngle(trees, Math.PI / 2 + epsilon), epsilon);
     }
 
     @Test
